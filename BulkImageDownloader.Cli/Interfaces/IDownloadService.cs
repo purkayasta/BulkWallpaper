@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper;
+using BulkImageDownloader.Cli.Helper.ViewModels;
 
-namespace BulkImageDownloader.Cli.Services
+namespace BulkImageDownloader.Cli.Interfaces
 {
 	interface IDownloadService
 	{

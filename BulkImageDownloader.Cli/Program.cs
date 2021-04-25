@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper;
+using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.Interfaces;
 using BulkImageDownloader.Cli.Menu;
 using BulkImageDownloader.Cli.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
+using Refit;
 
 namespace BulkImageDownloader.Cli
 {
@@ -19,9 +21,19 @@ namespace BulkImageDownloader.Cli
 			{
 				client.BaseAddress = new Uri("https://source.unsplash.com/");
 			}).AddPolicyHandler(GetRetryPolicy());
+			serviceCollection.AddHttpClient(ClientEnums.Bing.ToString(), client =>
+			{
+				client.BaseAddress = new Uri("https://www.bing.com/");
+			}).AddPolicyHandler(GetRetryPolicy());
 
+			serviceCollection.AddRefitClient<IBingApi>().ConfigureHttpClient(client =>
+			{
+				client.BaseAddress = new Uri("https://www.bing.com/");
+			});
 
 			serviceCollection.AddScoped<IDownloadService, UnsplashService>();
+			serviceCollection.AddScoped<IDownloadService, BingService>();
+
 			var serviceProvider = serviceCollection.BuildServiceProvider();
 
 
@@ -41,6 +53,17 @@ namespace BulkImageDownloader.Cli
 			var wallpaperProvider = DetectWallpaperProvider(providerAnswer);
 			var wallpaperProviderBuilder = DisplayMenu(wallpaperProvider);
 			var services = serviceProvider.GetRequiredService<IDownloadService>();
+
+			if (wallpaperProvider == ClientEnums.Bing)
+			{
+				var bingApiClient = serviceProvider.GetRequiredService<IBingApi>();
+				var responses = await bingApiClient.GetResponseAsync(wallpaperProviderBuilder.UrlPostFix);
+				if (responses.Images.Count > 0)
+				{
+					wallpaperProviderBuilder.BingApiResponses = responses.Images;
+				}
+			}
+
 			await services.InitiateDownloadAsync(wallpaperProviderBuilder);
 		}
 
@@ -49,6 +72,7 @@ namespace BulkImageDownloader.Cli
 			return wallpaperProvider switch
 			{
 				ClientEnums.Unsplash => new UnsplashMenu().Build(),
+				ClientEnums.Bing => new BingMenu().Build(),
 				_ => null,
 			};
 		}

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using BulkImageDownloader.Cli.Helper;
+using BulkImageDownloader.Cli.Helper.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using BulkImageDownloader.Cli.Helper;
+using System.IO;
+using BulkImageDownloader.Cli.Helper.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
@@ -13,6 +13,7 @@ namespace BulkImageDownloader.Cli.Menu
 		}
 		internal virtual int DefaultDownloadableImage { get; set; } = 10;
 		internal virtual string DefaultTags { get; set; }
+		internal virtual string DefaultDirectory { get; set; } = "BulkImageDownloader/";
 		public abstract WallpaperProviderBuilder Build();
 
 		/// Needs Proper Validation
@@ -60,6 +61,22 @@ namespace BulkImageDownloader.Cli.Menu
 			if (string.IsNullOrEmpty(answer))
 				return DefaultTags;
 			return answer;
+		}
+
+		protected string DownlaodableLocation()
+		{
+			Console.WriteLine("📩 Where you want to download your images? (Default - Current Directory): ");
+			var answer = Console.ReadLine();
+
+			if (!string.IsNullOrEmpty(answer))
+			{
+				if (Directory.Exists(answer))
+					return answer;
+
+				Console.WriteLine("Invalid Directory !");
+				DownlaodableLocation();
+			}
+			return DefaultDirectory;
 		}
 	}
 }

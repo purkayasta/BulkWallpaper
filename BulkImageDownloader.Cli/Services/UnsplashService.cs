@@ -2,7 +2,8 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper;
+using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.Interfaces;
 
 namespace BulkImageDownloader.Cli.Services
 {
@@ -15,7 +16,7 @@ namespace BulkImageDownloader.Cli.Services
 		{
 			Console.WriteLine("⏬ Downloading .... ");
 			string url = wallpaperProvider.UrlPostFix;
-			Directory.CreateDirectory("BulkDownlaoder/");
+			Directory.CreateDirectory($"{wallpaperProvider.DirectoryLocation}/Unsplash/");
 			for (int i = 0; i < wallpaperProvider.NumberOfImages; i++)
 			{
 				var responses = await GetContentAsync(url);

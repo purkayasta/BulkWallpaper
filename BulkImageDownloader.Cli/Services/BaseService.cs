@@ -24,5 +24,6 @@ namespace BulkImageDownloader.Cli.Services
 			using var httpClient = _httpClientFactory.CreateClient(_wallpaperClient.ToString());
 			return await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 		}
+		
 	}
 }
