@@ -1,6 +1,7 @@
 # Bulk Image Downloader
 - ✔ Unsplash
 - ✔ Bing
+- Packted it as a Cli tool
 
 
 ## Unsplash Demo
