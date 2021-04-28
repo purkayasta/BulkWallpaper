@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BulkImageDownloader.Cli.Helper.ViewModels
+namespace BulkImageDownloader.Cli.ViewModels
 {
-	public record Images
+	public record BingImages
 	{
 		[JsonPropertyName("url")]
 		public string Url { get; init; }

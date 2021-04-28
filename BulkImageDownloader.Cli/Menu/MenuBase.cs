@@ -1,82 +1,106 @@
 ﻿using System;
 using System.IO;
-using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
 	abstract class MenuBase
 	{
-		private readonly ClientEnums _wallpaperClient;
-		public MenuBase(ClientEnums wallpaperClientEnum)
+		private readonly WallpaperProviderEnum _wallpaperClient;
+		public MenuBase(WallpaperProviderEnum wallpaperClientEnum)
 		{
 			_wallpaperClient = wallpaperClientEnum;
 		}
-		internal virtual int DefaultDownloadableImage { get; set; } = 10;
-		internal virtual string DefaultTags { get; set; }
-		internal virtual string DefaultDirectory { get; set; } = "BulkImageDownloader/";
+		internal virtual int DownloadableImageCount { get; set; } = 10;
+		internal virtual string Tags { get; set; }
+		internal virtual string DownloadedDirectory { get; set; } = "BulkImageDownloader/";
+		internal virtual string SpecialRules { get; set; }
+		internal virtual int MaxDownloadLimit { get; set; } = 0;
 		public abstract WallpaperProviderBuilder Build();
 
 		/// Needs Proper Validation
 		/// <returns></returns>
-		protected int DownloadableImageQuestion()
+		protected void WallpaperCountSelector()
 		{
 			/* 
 			 * Cannot Accept Unlimited Numbers
 			 * Cannot Accept Negative Numbers
 			 */
-			Console.WriteLine($"📸🎦 How many  images you want to downlaod - (Default: {DefaultDownloadableImage}): ");
-			if (int.TryParse(Console.ReadLine(), out int answer))
+			Console.Write($"📸🎦 How many  images you want to downlaod - (Default: {DownloadableImageCount} {SpecialRules}): ");
+
+			string input = Console.ReadLine();
+			Console.WriteLine("");
+
+			if (string.IsNullOrWhiteSpace(input))
 			{
-				if (answer == 0)
+				return;
+			}
+
+			if (int.TryParse(input, out int answer))
+			{
+				if (MaxDownloadLimit > 0)
 				{
-					Console.WriteLine($"You want to downlaod {answer} images from {_wallpaperClient} ? 😵😵");
-					Console.WriteLine("Please Give a valid answer");
-					DownloadableImageQuestion();
+					if (answer > MaxDownloadLimit)
+					{
+						Console.WriteLine("Max Download Limit Crossed! ❌❌");
+						Console.WriteLine("Please Provide a value within the range!! ");
+						WallpaperCountSelector();
+					}
 				}
-				else
+
+				if (answer > 0)
 				{
-					DefaultDownloadableImage = answer;
+					DownloadableImageCount = answer;
+					return;
 				}
 			}
-			else
-			{
-				Console.WriteLine("Invalid Answer! Please Co-Operate");
-				DownloadableImageQuestion();
-			}
-			return DefaultDownloadableImage;
+
+			Console.WriteLine($"You want to downlaod {answer} images from {_wallpaperClient} ? 😵😵");
+			Console.WriteLine("Please provide a valid answer 🙏");
+			WallpaperCountSelector();
 		}
 
 		/// Needs Proper Validation
 		/// <returns></returns>
-		protected string WallpaperTypeQuestion()
+		protected void WallpaperTypeSelector()
 		{
 			/* 
 			 * Needs Proper Validation
 			 * Cannot Accept Special Characters
 			 * Only Accept Comma Separated Text
 			 */
-
-			Console.WriteLine($"🌀🏁 Select Tags - (Default : {DefaultTags}): ");
+			Console.Write($"🌀🏁 Select Tags - (Default : {Tags}): ");
 			string answer = Console.ReadLine();
+
+			Console.WriteLine("");
+
 			if (string.IsNullOrEmpty(answer))
-				return DefaultTags;
-			return answer;
+				return;
+
+			Tags = answer;
 		}
 
-		protected string DownlaodableLocation()
+		protected void DirectoryLocationSelector()
 		{
-			Console.WriteLine("📩 Where you want to download your images? (Default - Current Directory): ");
+			Console.Write("📩 Where you want to download your images? (Default - Current Directory): ");
 			var answer = Console.ReadLine();
+
+			Console.WriteLine("");
 
 			if (!string.IsNullOrEmpty(answer))
 			{
 				if (Directory.Exists(answer))
-					return answer;
+				{
+					var diretory = Directory.CreateDirectory(answer + "/" + DownloadedDirectory);
+
+					DownloadedDirectory = diretory.FullName;
+
+					return;
+				}
 
 				Console.WriteLine("Invalid Directory !");
-				DownlaodableLocation();
+				DirectoryLocationSelector();
 			}
-			return DefaultDirectory;
 		}
 	}
 }

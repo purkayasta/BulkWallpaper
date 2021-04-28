@@ -1,5 +1,5 @@
 ﻿using System;
-using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
@@ -8,30 +8,32 @@ namespace BulkImageDownloader.Cli.Menu
 		private string _url = string.Empty;
 		private bool FeatureImage { get; init; } = true;
 
-		public UnsplashMenu() : base(ClientEnums.Unsplash)
+		public UnsplashMenu() : base(WallpaperProviderEnum.Unsplash)
 		{
-			DefaultTags = "nature, water";
+			Tags = "Tokyo, Japan, London, seoul, coffee shop, city";
 		}
 
 		public override WallpaperProviderBuilder Build()
 		{
-			var numberOfImage = DownloadableImageQuestion();
-			var selectedTags = WallpaperTypeQuestion();
+			WallpaperCountSelector();
+			WallpaperTypeSelector();
 			var isFeatured = FeatureImageQuestion();
+			DirectoryLocationSelector();
 
 			if (isFeatured)
 			{
-				_url = $"/featured/1920x1024/?{selectedTags}";
+				_url = $"/featured/1920x1024/?{Tags}";
 			}
 			else
 			{
-				_url = $"/1920x1024/?{selectedTags}";
+				_url = $"/1920x1024/?{Tags}";
 			}
 
 			WallpaperProviderBuilder returnableObject = new()
 			{
-				NumberOfImages = numberOfImage,
-				UrlPostFix = _url
+				NumberOfImages = DownloadableImageCount,
+				UrlPostFix = new[] { _url },
+				DirectoryLocation = DownloadedDirectory
 			};
 
 			return returnableObject;

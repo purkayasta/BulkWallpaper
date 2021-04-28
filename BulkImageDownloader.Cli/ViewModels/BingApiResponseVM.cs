@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace BulkImageDownloader.Cli.Helper.ViewModels
+namespace BulkImageDownloader.Cli.ViewModels
 {
 	public record BingApiResponseVM
 	{
 		[JsonPropertyName("images")]
-		public IReadOnlyList<Images> Images { get; init; }
+		public IReadOnlyList<BingImages> Images { get; init; }
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace BulkImageDownloader.Cli
 {
-	enum ClientEnums
+	enum WallpaperProviderEnum
 	{
 		Unsplash,
 		Bing,

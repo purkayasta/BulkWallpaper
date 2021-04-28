@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.ViewModels;
 using BulkImageDownloader.Cli.Interfaces;
 using BulkImageDownloader.Cli.Menu;
 using BulkImageDownloader.Cli.Services;
+using Humanizer;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
@@ -14,31 +16,52 @@ namespace BulkImageDownloader.Cli
 {
 	class Program
 	{
+		static Stopwatch _stopwatch;
 		static async Task Main()
 		{
-			var serviceCollection = new ServiceCollection();
-			serviceCollection.AddHttpClient(ClientEnums.Unsplash.ToString(), client =>
+			try
+			{
+				_stopwatch = new Stopwatch();
+				var serviceCollection = new ServiceCollection();
+
+				ConfigureServices(serviceCollection);
+
+				var serviceProvider = serviceCollection.BuildServiceProvider();
+
+				await StartAsync(serviceProvider);
+
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Something Bad Happened!!");
+			}
+			finally
+			{
+				_stopwatch.Stop();
+			}
+		}
+
+		private static void ConfigureServices(IServiceCollection services)
+		{
+			services.AddHttpClient(WallpaperProviderEnum.Unsplash.ToString(), client =>
 			{
 				client.BaseAddress = new Uri("https://source.unsplash.com/");
 			}).AddPolicyHandler(GetRetryPolicy());
-			serviceCollection.AddHttpClient(ClientEnums.Bing.ToString(), client =>
+
+			services.AddHttpClient(WallpaperProviderEnum.Bing.ToString(), client =>
 			{
-				client.BaseAddress = new Uri("https://www.bing.com/");
+				client.BaseAddress = new Uri("https://www.bing.com");
 			}).AddPolicyHandler(GetRetryPolicy());
 
-			serviceCollection.AddRefitClient<IBingApi>().ConfigureHttpClient(client =>
+			services.AddRefitClient<IBingApi>().ConfigureHttpClient(client =>
 			{
 				client.BaseAddress = new Uri("https://www.bing.com/");
 			});
 
-			serviceCollection.AddScoped<IDownloadService, UnsplashService>();
-			serviceCollection.AddScoped<IDownloadService, BingService>();
-
-			var serviceProvider = serviceCollection.BuildServiceProvider();
-
-
-			await StartAsync(serviceProvider);
+			services.AddScoped<IUnsplashService, UnsplashService>();
+			services.AddScoped<IBingService, BingService>();
 		}
+
 		private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 		{
 			return HttpPolicyExtensions.HandleTransientHttpError()
@@ -46,45 +69,37 @@ namespace BulkImageDownloader.Cli
 				.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(5000));
 		}
 
+
 		private static async Task StartAsync(IServiceProvider serviceProvider)
 		{
-			Console.WriteLine("1. Select Wallpaper Provider (Unsplash, Bing, Pexels) - ");
+			Console.WriteLine("1. Select Wallpaper Provider (Unsplash, Bing) - (Press Enter to Select Default) ");
 			var providerAnswer = Console.ReadLine();
 			var wallpaperProvider = DetectWallpaperProvider(providerAnswer);
 			var wallpaperProviderBuilder = DisplayMenu(wallpaperProvider);
-			var services = serviceProvider.GetRequiredService<IDownloadService>();
 
-			if (wallpaperProvider == ClientEnums.Bing)
-			{
-				var bingApiClient = serviceProvider.GetRequiredService<IBingApi>();
-				var responses = await bingApiClient.GetResponseAsync(wallpaperProviderBuilder.UrlPostFix);
-				if (responses.Images.Count > 0)
-				{
-					wallpaperProviderBuilder.BingApiResponses = responses.Images;
-				}
-			}
-
-			await services.InitiateDownloadAsync(wallpaperProviderBuilder);
+			_stopwatch.Start();
+			await ProgramEntry.InitializeAsync(serviceProvider, wallpaperProviderBuilder, wallpaperProvider);
+			Console.WriteLine($"⏲ Total Time Taken : {_stopwatch.Elapsed.Humanize()}");
 		}
 
-		private static WallpaperProviderBuilder DisplayMenu(ClientEnums wallpaperProvider)
+
+		private static WallpaperProviderBuilder DisplayMenu(WallpaperProviderEnum wallpaperProvider)
 		{
 			return wallpaperProvider switch
 			{
-				ClientEnums.Unsplash => new UnsplashMenu().Build(),
-				ClientEnums.Bing => new BingMenu().Build(),
+				WallpaperProviderEnum.Unsplash => new UnsplashMenu().Build(),
+				WallpaperProviderEnum.Bing => new BingMenu().Build(),
 				_ => null,
 			};
 		}
 
-
-		private static ClientEnums DetectWallpaperProvider(string providerAnswer)
+		private static WallpaperProviderEnum DetectWallpaperProvider(string providerAnswer)
 		{
 			return providerAnswer.ToLower() switch
 			{
-				"unsplash" => ClientEnums.Unsplash,
-				"bing" => ClientEnums.Bing,
-				_ => ClientEnums.Unsplash,
+				"unsplash" => WallpaperProviderEnum.Unsplash,
+				"bing" => WallpaperProviderEnum.Bing,
+				_ => WallpaperProviderEnum.Unsplash,
 			};
 		}
 	}

@@ -6,9 +6,9 @@ namespace BulkImageDownloader.Cli.Services
 {
 	abstract class BaseService
 	{
-		private readonly ClientEnums _wallpaperClient;
+		private readonly WallpaperProviderEnum _wallpaperClient;
 		private readonly IHttpClientFactory _httpClientFactory;
-		public BaseService(IHttpClientFactory httpClientFactory, ClientEnums wallpaperClient)
+		public BaseService(IHttpClientFactory httpClientFactory, WallpaperProviderEnum wallpaperClient)
 		{
 			_httpClientFactory = httpClientFactory;
 			_wallpaperClient = wallpaperClient;

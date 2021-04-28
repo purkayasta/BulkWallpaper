@@ -2,24 +2,18 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.ViewModels;
 using BulkImageDownloader.Cli.Interfaces;
 
 namespace BulkImageDownloader.Cli.Services
 {
-	class BingService : BaseService, IDownloadService
+	class BingService : BaseService, IBingService
 	{
-		public BingService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, ClientEnums.Bing)
+		public BingService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, WallpaperProviderEnum.Bing)
 		{
 		}
 		public async Task InitiateDownloadAsync(WallpaperProviderBuilder wallpaperProvider)
 		{
-			if (wallpaperProvider.BingApiResponses.Count < 0)
-			{
-				Console.WriteLine("Network Error! Please Try Again...");
-				return;
-			}
-
 			Console.WriteLine("⏬ Downloading .... ");
 
 			var directory = $"{wallpaperProvider.DirectoryLocation}/Bing/";

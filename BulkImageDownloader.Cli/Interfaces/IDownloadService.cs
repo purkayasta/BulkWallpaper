@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper.ViewModels;
+using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Interfaces
 {
