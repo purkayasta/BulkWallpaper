@@ -13,8 +13,9 @@ namespace BulkImageDownloader.Cli.Menu
 		}
 		internal virtual int DownloadableImageCount { get; set; } = 10;
 		internal virtual string Tags { get; set; }
-		internal virtual string DownloadedDirectory { get; set; } = "BulkImageDownloader/";
-		internal virtual string SpecialRules { get; set; }
+		internal virtual string DownloadedDirectory { get; set; } = "Wallpapers/";
+		internal virtual string SpecialDownloadCountRules { get; set; }
+		internal virtual string SpecialTagRules { get; set; }
 		internal virtual int MaxDownloadLimit { get; set; } = 0;
 		public abstract WallpaperProviderBuilder Build();
 
@@ -26,7 +27,7 @@ namespace BulkImageDownloader.Cli.Menu
 			 * Cannot Accept Unlimited Numbers
 			 * Cannot Accept Negative Numbers
 			 */
-			Console.Write($"📸🎦 How many  images you want to downlaod - (Default: {DownloadableImageCount} {SpecialRules}): ");
+			Console.Write($"📸🎦 How many  images you want to downlaod - (Default: {DownloadableImageCount} {SpecialDownloadCountRules}): ");
 
 			string input = Console.ReadLine();
 			Console.WriteLine("");
@@ -69,7 +70,7 @@ namespace BulkImageDownloader.Cli.Menu
 			 * Cannot Accept Special Characters
 			 * Only Accept Comma Separated Text
 			 */
-			Console.Write($"🌀🏁 Select Tags - (Default : {Tags}): ");
+			Console.Write($"🌀🏁 Select Tags - (Default : {Tags}): {SpecialTagRules} ");
 			string answer = Console.ReadLine();
 
 			Console.WriteLine("");

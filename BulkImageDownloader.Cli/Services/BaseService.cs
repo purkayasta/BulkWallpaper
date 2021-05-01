@@ -7,10 +7,10 @@ namespace BulkImageDownloader.Cli.Services
 	abstract class BaseService
 	{
 		private readonly WallpaperProviderEnum _wallpaperClient;
-		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly HttpClient _httpClient;
 		public BaseService(IHttpClientFactory httpClientFactory, WallpaperProviderEnum wallpaperClient)
 		{
-			_httpClientFactory = httpClientFactory;
+			_httpClient = httpClientFactory.CreateClient(_wallpaperClient.ToString());
 			_wallpaperClient = wallpaperClient;
 		}
 		protected async Task SaveAsync(HttpResponseMessage response, string localPathWithImageName)
@@ -21,9 +21,8 @@ namespace BulkImageDownloader.Cli.Services
 		}
 		protected async Task<HttpResponseMessage> GetContentAsync(string url)
 		{
-			using var httpClient = _httpClientFactory.CreateClient(_wallpaperClient.ToString());
-			return await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+			return await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 		}
-		
+
 	}
 }

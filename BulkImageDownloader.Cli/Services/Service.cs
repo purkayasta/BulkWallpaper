@@ -5,30 +5,34 @@ using BulkImageDownloader.Cli.ViewModels;
 using BulkImageDownloader.Cli.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BulkImageDownloader.Cli
+namespace BulkImageDownloader.Cli.Services
 {
-	class ProgramEntry
+	public class Service
 	{
-		internal static async Task InitializeAsync(IServiceProvider serviceProvider, WallpaperProviderBuilder wallpaperProviderBuilder, WallpaperProviderEnum wallpaperProvider)
+		public static async Task InitializeAsync(IServiceProvider serviceProvider, WallpaperProviderBuilder wallpaperProviderBuilder, WallpaperProviderEnum wallpaperProvider)
 		{
 			switch (wallpaperProvider)
 			{
 				case WallpaperProviderEnum.Unsplash:
 					var unsplashService = serviceProvider.GetRequiredService<IUnsplashService>();
-					await StartUnsplashAsync(unsplashService, wallpaperProviderBuilder);
+					await StartDownloadService(unsplashService, wallpaperProviderBuilder);
 					break;
 				case WallpaperProviderEnum.Bing:
 					var bingApiService = serviceProvider.GetRequiredService<IBingApi>();
 					var bingService = serviceProvider.GetRequiredService<IBingService>();
 					await StartBingAsync(bingService, bingApiService, wallpaperProviderBuilder);
 					break;
+				case WallpaperProviderEnum.Pexels:
+					var pexelService = serviceProvider.GetRequiredService<IPexelService>();
+					await StartDownloadService(pexelService, wallpaperProviderBuilder);
+					break;
 			}
 
 		}
 
-		internal static async Task StartBingAsync(IBingService bingService, IBingApi bingApiService, WallpaperProviderBuilder wallpaperProviderBuilder)
+		public static async Task StartBingAsync(IBingService bingService, IBingApi bingApiService, WallpaperProviderBuilder wallpaperProviderBuilder)
 		{
-			string[] urlArray = wallpaperProviderBuilder.UrlPostFix;
+			string[] urlArray = wallpaperProviderBuilder.Urls;
 			foreach (var url in urlArray)
 			{
 				if (!string.IsNullOrEmpty(url))
@@ -46,9 +50,9 @@ namespace BulkImageDownloader.Cli
 			else
 				Console.WriteLine("No Valid Url Found To Download 😭😭");
 		}
-		internal static async Task StartUnsplashAsync(IUnsplashService unsplashService, WallpaperProviderBuilder wallpaperProviderBuilder)
+		public static async Task StartDownloadService(IDownloadService wallpaperService, WallpaperProviderBuilder wallpaperProviderBuilder)
 		{
-			await unsplashService.InitiateDownloadAsync(wallpaperProviderBuilder);
+			await wallpaperService.InitiateDownloadAsync(wallpaperProviderBuilder);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace BulkImageDownloader.Cli.Interfaces
 {
-	interface IUnsplashService : IDownloadService
+	public interface IUnsplashService : IDownloadService
 	{
 	}
 }

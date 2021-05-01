@@ -16,8 +16,8 @@ namespace BulkImageDownloader.Cli.Services
 		public async Task InitiateDownloadAsync(WallpaperProviderBuilder wallpaperProvider)
 		{
 			Console.WriteLine("⏬ Downloading .... ");
-			string[] urls = wallpaperProvider.UrlPostFix;
-			var unsplashDirectory = $"{wallpaperProvider.DirectoryLocation}/Unsplash";
+			string[] urls = wallpaperProvider.Urls;
+			var unsplashDirectory = $"{wallpaperProvider.DirectoryLocation}/Unsplash/";
 			Directory.CreateDirectory(unsplashDirectory);
 
 			int progress = 0;
@@ -25,6 +25,7 @@ namespace BulkImageDownloader.Cli.Services
 
 			foreach (var url in urls)
 			{
+				// hitting same url for random images
 				for (int i = 0; i < totalCount; i++)
 				{
 					var responses = await GetContentAsync(url);

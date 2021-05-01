@@ -13,7 +13,7 @@ namespace BulkImageDownloader.Cli.Menu
 		public BingMenu() : base(WallpaperProviderEnum.Bing)
 		{
 			DownloadableImageCount = 7;
-			SpecialRules = "Max = 14";
+			SpecialDownloadCountRules = "Max = 14";
 			MaxDownloadLimit = 14;
 		}
 
@@ -26,7 +26,7 @@ namespace BulkImageDownloader.Cli.Menu
 			WallpaperProviderBuilder returnableObject = new()
 			{
 				NumberOfImages = DownloadableImageCount,
-				UrlPostFix = urlArray,
+				Urls = urlArray,
 				DirectoryLocation = DownloadedDirectory
 			};
 

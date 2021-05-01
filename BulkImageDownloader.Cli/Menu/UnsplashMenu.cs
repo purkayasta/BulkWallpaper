@@ -32,7 +32,7 @@ namespace BulkImageDownloader.Cli.Menu
 			WallpaperProviderBuilder returnableObject = new()
 			{
 				NumberOfImages = DownloadableImageCount,
-				UrlPostFix = new[] { _url },
+				Urls = new[] { _url },
 				DirectoryLocation = DownloadedDirectory
 			};
 

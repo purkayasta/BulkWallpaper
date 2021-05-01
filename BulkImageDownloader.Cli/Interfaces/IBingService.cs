@@ -1,6 +1,6 @@
 ﻿namespace BulkImageDownloader.Cli.Interfaces
 {
-	interface IBingService : IDownloadService
+	public interface IBingService : IDownloadService
 	{
 	}
 }
