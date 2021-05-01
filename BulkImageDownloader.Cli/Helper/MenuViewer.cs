@@ -40,25 +40,25 @@ namespace BulkImageDownloader.Cli.Helper
 			}
 		}
 
-		public static WallpaperProviderBuilder DisplayMenu(WallpaperProviderEnum wallpaperProvider, IServiceProvider serviceProvider)
+		public static WallpaperModel DisplayMenu(ClientEnum wallpaperProvider, IServiceProvider serviceProvider)
 		{
 			return wallpaperProvider switch
-			{
-				WallpaperProviderEnum.Unsplash => new UnsplashMenu().Build(),
-				WallpaperProviderEnum.Bing => new BingMenu().Build(),
-				WallpaperProviderEnum.Pexels => new PexelsMenu(serviceProvider).Build(),
-				_ => null,
-			};
+            {
+                ClientEnum.Unsplash => new UnsplashMenu().Build(),
+                ClientEnum.Bing => new BingMenu().Build(),
+                ClientEnum.Pexels => new PexelsMenu(serviceProvider).Build(),
+                _ => throw new NotImplementedException("This Type Not Found")
+            };
 		}
 
-		public static WallpaperProviderEnum DetectWallpaperProvider(string providerAnswer)
+		public static ClientEnum DetectWallpaperProvider(string providerAnswer)
 		{
 			return providerAnswer.ToLower() switch
 			{
-				"unsplash" => WallpaperProviderEnum.Unsplash,
-				"bing" => WallpaperProviderEnum.Bing,
-				"pexels" => WallpaperProviderEnum.Pexels,
-				_ => WallpaperProviderEnum.Unsplash,
+				"unsplash" => ClientEnum.Unsplash,
+				"bing" => ClientEnum.Bing,
+				"pexels" => ClientEnum.Pexels,
+				_ => ClientEnum.Unsplash,
 			};
 		}
 	}

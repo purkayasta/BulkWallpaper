@@ -5,6 +5,6 @@ namespace BulkImageDownloader.Cli.Interfaces
 {
 	public interface IDownloadService
 	{
-		public Task InitiateDownloadAsync(WallpaperProviderBuilder wallpaperProvider);
+		public Task InitiateDownloadAsync(WallpaperModel wallpaperProvider);
 	}
 }

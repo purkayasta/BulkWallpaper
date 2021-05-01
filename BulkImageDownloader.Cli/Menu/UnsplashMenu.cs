@@ -1,62 +1,81 @@
 ﻿using System;
+using System.Collections.Generic;
 using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-	internal class UnsplashMenu : MenuBase
-	{
-		private string _url = string.Empty;
-		private bool FeatureImage { get; init; } = true;
+    public class UnsplashMenu : MenuBase
+    {
+        private string _url = string.Empty;
+        public bool FeatureImage { get; set; } = true;
 
-		public UnsplashMenu() : base(WallpaperProviderEnum.Unsplash)
-		{
-			Tags = "Tokyo, Japan, London, seoul, coffee shop, city";
-		}
+        public UnsplashMenu() : base(ClientEnum.Unsplash)
+        {
+            Tags = "Japan, London, coffee shop, 4k wallpapers";
+        }
 
-		public override WallpaperProviderBuilder Build()
-		{
-			WallpaperCountSelector();
-			WallpaperTypeSelector();
-			var isFeatured = FeatureImageQuestion();
-			DirectoryLocationSelector();
+        public override WallpaperModel Build()
+        {
+            WallpaperCountSelector();
+            WallpaperTypeSelector();
+            FeatureImageQuestion();
+            DirectoryLocationSelector();
 
-			if (isFeatured)
-			{
-				_url = $"/featured/1920x1024/?{Tags}";
-			}
-			else
-			{
-				_url = $"/1920x1024/?{Tags}";
-			}
+            if (FeatureImage)
+            {
+                _url = $"/featured/1920x1024/?{Tags}";
+            }
+            else
+            {
+                _url = $"/1920x1024/?{Tags}";
+            }
 
-			WallpaperProviderBuilder returnableObject = new()
-			{
-				NumberOfImages = DownloadableImageCount,
-				Urls = new[] { _url },
-				DirectoryLocation = DownloadedDirectory
-			};
+            var urls = BuildUrls(DownloadableImageCount, _url);
 
-			return returnableObject;
-		}
 
-		private bool FeatureImageQuestion()
-		{
-			Console.WriteLine($"🌀🏁 Want Currated Images From Unsplash? - (Default : {FeatureImage}): ");
-			string answer = Console.ReadLine();
+            WallpaperModel returnableObject = new()
+            {
+                NumberOfImages = DownloadableImageCount,
+                Urls = new[] { _url },
+                ImageInfos = urls,
+                DirectoryLocation = DownloadedDirectory
+            };
 
-			if (string.IsNullOrEmpty(answer))
-				return FeatureImage;
+            return returnableObject;
+        }
 
-			if (answer.ToLower().Equals("yes") || answer.ToLower().Equals("no"))
-			{
-				return bool.Parse(answer.ToLower());
-			}
-			else
-			{
-				Console.WriteLine("Invalid Answer! ");
-				FeatureImageQuestion();
-			}
-			return false;
-		}
-	}
+        public void FeatureImageQuestion()
+        {
+            Console.WriteLine($"🌀🏁 Want Currated Images From Unsplash? - (Default : {FeatureImage}): ");
+            string answer = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(answer))
+                return;
+
+            if (answer.ToLower().Equals("yes") || answer.ToLower().Equals("no"))
+            {
+                FeatureImage = bool.Parse(answer.ToLower());
+            }
+            else
+            {
+                Console.WriteLine("Invalid Answer! ");
+                FeatureImageQuestion();
+            }
+            return;
+        }
+
+        public List<ImageInfo> BuildUrls(int count, string url)
+        {
+            List<ImageInfo> imageInfos = new List<ImageInfo>();
+            for (int i = 0; i < count; i++)
+            {
+                imageInfos.Add(new ImageInfo
+                {
+                    Name = Guid.NewGuid().ToString() + ".jpg",
+                    Url = url
+                });
+            }
+            return imageInfos;
+        }
+    }
 }

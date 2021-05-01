@@ -9,30 +9,29 @@ namespace BulkImageDownloader.Cli.Services
 {
 	public class Service
 	{
-		public static async Task InitializeAsync(IServiceProvider serviceProvider, WallpaperProviderBuilder wallpaperProviderBuilder, WallpaperProviderEnum wallpaperProvider)
+		public static async Task InitializeAsync(IServiceProvider serviceProvider, WallpaperModel wallpaperModel, ClientEnum clientEnum)
 		{
-			switch (wallpaperProvider)
+			switch (clientEnum)
 			{
-				case WallpaperProviderEnum.Unsplash:
+				case ClientEnum.Unsplash:
 					var unsplashService = serviceProvider.GetRequiredService<IUnsplashService>();
-					await StartDownloadService(unsplashService, wallpaperProviderBuilder);
+					await StartDownloadService(unsplashService, wallpaperModel);
 					break;
-				case WallpaperProviderEnum.Bing:
+				case ClientEnum.Bing:
 					var bingApiService = serviceProvider.GetRequiredService<IBingApi>();
 					var bingService = serviceProvider.GetRequiredService<IBingService>();
-					await StartBingAsync(bingService, bingApiService, wallpaperProviderBuilder);
+					await StartBingAsync(bingService, bingApiService, wallpaperModel);
 					break;
-				case WallpaperProviderEnum.Pexels:
+				case ClientEnum.Pexels:
 					var pexelService = serviceProvider.GetRequiredService<IPexelService>();
-					await StartDownloadService(pexelService, wallpaperProviderBuilder);
+					await StartDownloadService(pexelService, wallpaperModel);
 					break;
 			}
-
 		}
 
-		public static async Task StartBingAsync(IBingService bingService, IBingApi bingApiService, WallpaperProviderBuilder wallpaperProviderBuilder)
+		public static async Task StartBingAsync(IBingService bingService, IBingApi bingApiService, WallpaperModel wallpaperModel)
 		{
-			string[] urlArray = wallpaperProviderBuilder.Urls;
+			string[] urlArray = wallpaperModel.Urls;
 			foreach (var url in urlArray)
 			{
 				if (!string.IsNullOrEmpty(url))
@@ -40,19 +39,19 @@ namespace BulkImageDownloader.Cli.Services
 					var responses = await bingApiService.GetResponseAsync(url);
 					if (responses.Images.Count > 0)
 					{
-						wallpaperProviderBuilder.BingApiResponses.AddRange(responses.Images.ToList());
+						wallpaperModel.BingApiResponses.AddRange(responses.Images.ToList());
 					}
 				}
 
 			}
-			if (wallpaperProviderBuilder.BingApiResponses.Count > 0)
-				await bingService.InitiateDownloadAsync(wallpaperProviderBuilder);
+			if (wallpaperModel.BingApiResponses.Count > 0)
+				await bingService.InitiateDownloadAsync(wallpaperModel);
 			else
 				Console.WriteLine("No Valid Url Found To Download 😭😭");
 		}
-		public static async Task StartDownloadService(IDownloadService wallpaperService, WallpaperProviderBuilder wallpaperProviderBuilder)
+		public static async Task StartDownloadService(IDownloadService wallpaperService, WallpaperModel wallpaperModel)
 		{
-			await wallpaperService.InitiateDownloadAsync(wallpaperProviderBuilder);
+			await wallpaperService.InitiateDownloadAsync(wallpaperModel);
 		}
 	}
 }

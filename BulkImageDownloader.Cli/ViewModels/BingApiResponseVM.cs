@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace BulkImageDownloader.Cli.ViewModels
 {
-	public record BingApiResponseVM
+	public struct BingApiResponseVM
 	{
 		[JsonPropertyName("images")]
 		public IReadOnlyList<BingImages> Images { get; init; }

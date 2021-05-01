@@ -8,37 +8,34 @@ using BulkImageDownloader.Cli.Interfaces;
 
 namespace BulkImageDownloader.Cli.Services
 {
-	class UnsplashService : BaseService, IUnsplashService
-	{
-		public UnsplashService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, WallpaperProviderEnum.Unsplash)
-		{
-		}
-		public async Task InitiateDownloadAsync(WallpaperProviderBuilder wallpaperProvider)
-		{
-			Console.WriteLine("⏬ Downloading .... ");
-			string[] urls = wallpaperProvider.Urls;
-			var unsplashDirectory = $"{wallpaperProvider.DirectoryLocation}/Unsplash/";
-			Directory.CreateDirectory(unsplashDirectory);
+    public class UnsplashService : BaseService, IUnsplashService
+    {
+        public UnsplashService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, ClientEnum.Unsplash)
+        {
+        }
+        public async Task InitiateDownloadAsync(WallpaperModel wallpaperModel)
+        {
+            Console.WriteLine("⏬ Downloading .... ");
+            var imagesInfo = wallpaperModel.ImageInfos;
+            var unsplashDirectory = $"{wallpaperModel.DirectoryLocation}/Unsplash/";
+            Directory.CreateDirectory(unsplashDirectory);
 
-			int progress = 0;
-			int totalCount = wallpaperProvider.NumberOfImages;
+            int progress = 0;
+            int totalCount = wallpaperModel.NumberOfImages;
 
-			foreach (var url in urls)
-			{
-				// hitting same url for random images
-				for (int i = 0; i < totalCount; i++)
-				{
-					var responses = await GetContentAsync(url);
-					await SaveAsync(responses, $"{unsplashDirectory}/{DateTime.UtcNow:MM_dd_yyyy}_{i}.png");
+            foreach (var image in imagesInfo)
+            {
+                var responses = await GetContentAsync(image.Url);
+                await SaveAsync(responses, $"{unsplashDirectory}/{image.Name}");
 
-					progress++;
-					Console.Write($"\r {progress} | {totalCount}");
-					Thread.Sleep(2000);
-				}
-			}
+                progress++;
+                Console.Write($"\r {progress} | {totalCount}");
 
-			Console.WriteLine("");
-			Console.WriteLine("⏬ Downloaded ....  ✔ 💹");
-		}
-	}
+                Thread.Sleep(3000);
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("⏬ Downloaded ....  ✔ 💹");
+        }
+    }
 }

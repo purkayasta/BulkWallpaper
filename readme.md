@@ -1,7 +1,14 @@
 # Bulk Image Downloader
 - ✔ Unsplash
 - ✔ Bing
-- Packted it as a Cli tool
+- ✔ Pexels
+- [ ] Packted it as a Cli tool
+
+
+## Pexels:
+For Pexels, For security purpose I have removed My accesskey, You can easily get your key from [here](https://www.pexels.com/api/)
+Just create a new account and thats it :D
+When you have your key, just add it to appsetting.json file
 
 
 ## Unsplash Demo
