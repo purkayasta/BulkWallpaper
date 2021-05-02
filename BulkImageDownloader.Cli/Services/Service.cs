@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.ViewModels;
 using BulkImageDownloader.Cli.Interfaces;
+using BulkImageDownloader.Cli.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BulkImageDownloader.Cli.Services

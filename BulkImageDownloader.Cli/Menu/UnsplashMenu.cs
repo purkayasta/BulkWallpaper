@@ -4,7 +4,7 @@ using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-    public class UnsplashMenu : MenuBase
+	public class UnsplashMenu : BaseMenu
     {
         private string _url = string.Empty;
         public bool FeatureImage { get; set; } = true;

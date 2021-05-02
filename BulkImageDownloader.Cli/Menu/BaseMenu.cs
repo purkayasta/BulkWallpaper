@@ -4,10 +4,10 @@ using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-    public abstract class MenuBase
+	public abstract class BaseMenu
     {
         private readonly ClientEnum _wallpaperClient;
-        public MenuBase(ClientEnum wallpaperClientEnum)
+        public BaseMenu(ClientEnum wallpaperClientEnum)
         {
             _wallpaperClient = wallpaperClientEnum;
         }
@@ -29,7 +29,7 @@ namespace BulkImageDownloader.Cli.Menu
 			 */
             Console.Write($"📸🎦 How many  images you want to downlaod - (Default: {DownloadableImageCount} {SpecialDownloadCountRules}): ");
 
-            string input = Console.ReadLine();
+            string input = GetUserInput();
             Console.WriteLine("");
 
             if (string.IsNullOrWhiteSpace(input))
@@ -71,7 +71,7 @@ namespace BulkImageDownloader.Cli.Menu
 			 * Only Accept Comma Separated Text
 			 */
             Console.Write($"🌀🏁 Select Tags - (Default : {Tags}): {SpecialTagRules} ");
-            string answer = Console.ReadLine();
+            string answer = GetUserInput();
 
             Console.WriteLine("");
 
@@ -84,15 +84,16 @@ namespace BulkImageDownloader.Cli.Menu
         public void DirectoryLocationSelector()
         {
             Console.Write("📩 Where you want to download your images? (Default - Current Directory): ");
-            var answer = Console.ReadLine();
+            var answer = GetUserInput();
 
             Console.WriteLine("");
 
             if (!string.IsNullOrEmpty(answer))
             {
-                if (Directory.Exists(answer))
+                if (IsDirectoryExist(answer))
                 {
-                    var diretory = Directory.CreateDirectory(answer + "/" + DownloadedDirectory);
+                    //var diretory = Directory.CreateDirectory(answer + "/" + DownloadedDirectory);
+                    var diretory = CreateDirectory(answer);
 
                     DownloadedDirectory = diretory.FullName;
 
@@ -103,5 +104,9 @@ namespace BulkImageDownloader.Cli.Menu
                 DirectoryLocationSelector();
             }
         }
+
+        public virtual string GetUserInput() => Console.ReadLine();
+        public virtual DirectoryInfo CreateDirectory(string name) => Directory.CreateDirectory(name + "/" + DownloadedDirectory);
+        public virtual bool IsDirectoryExist(string name) => Directory.Exists(name);
     }
 }

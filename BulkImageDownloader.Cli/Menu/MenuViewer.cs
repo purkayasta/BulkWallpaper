@@ -2,12 +2,11 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Menu;
 using BulkImageDownloader.Cli.Services;
 using BulkImageDownloader.Cli.ViewModels;
 using Humanizer;
 
-namespace BulkImageDownloader.Cli.Helper
+namespace BulkImageDownloader.Cli.Menu
 {
 	public class MenuViewer
 	{
@@ -43,12 +42,12 @@ namespace BulkImageDownloader.Cli.Helper
 		public static WallpaperModel DisplayMenu(ClientEnum wallpaperProvider, IServiceProvider serviceProvider)
 		{
 			return wallpaperProvider switch
-            {
-                ClientEnum.Unsplash => new UnsplashMenu().Build(),
-                ClientEnum.Bing => new BingMenu().Build(),
-                ClientEnum.Pexels => new PexelsMenu(serviceProvider).Build(),
-                _ => throw new NotImplementedException("This Type Not Found")
-            };
+			{
+				ClientEnum.Unsplash => new UnsplashMenu().Build(),
+				ClientEnum.Bing => new BingMenu().Build(),
+				ClientEnum.Pexels => new PexelsMenu(serviceProvider).Build(),
+				_ => throw new NotImplementedException("This Type Not Found")
+			};
 		}
 
 		public static ClientEnum DetectWallpaperProvider(string providerAnswer)

@@ -3,12 +3,12 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.ViewModels;
 using BulkImageDownloader.Cli.Interfaces;
+using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Services
 {
-    public class UnsplashService : BaseService, IUnsplashService
+	public class UnsplashService : BaseService, IUnsplashService
     {
         public UnsplashService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, ClientEnum.Unsplash)
         {

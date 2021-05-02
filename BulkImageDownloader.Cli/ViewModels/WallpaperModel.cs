@@ -2,7 +2,7 @@
 
 namespace BulkImageDownloader.Cli.ViewModels
 {
-    public struct WallpaperModel
+	public struct WallpaperModel
     {
         public int NumberOfImages { get; init; }
         public string[] Urls { get; init; }
