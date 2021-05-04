@@ -2,7 +2,9 @@
 - ✔ Unsplash
 - ✔ Bing
 - ✔ Pexels
-- [ ] Packted it as a Cli tool
+- [x] Packted it as a Cli tool
+
+See this On [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
 
 
 ## Pexels:
