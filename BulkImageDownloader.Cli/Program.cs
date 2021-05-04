@@ -1,17 +1,17 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Interfaces;
+﻿using BulkImageDownloader.Cli.Interfaces;
 using BulkImageDownloader.Cli.Menu;
 using BulkImageDownloader.Cli.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
 using Refit;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace BulkImageDownloader.Cli
 {
-	class Program
+    class Program
 	{
 		static async Task Main()
 		{

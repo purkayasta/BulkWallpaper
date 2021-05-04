@@ -4,7 +4,7 @@ using Xunit;
 
 namespace BulkImageDownloader.Cli.Test.Menu
 {
-	public class BingMenuTest
+    public class BingMenuTest
 	{
 		private readonly Mock<BingMenu> _mockSut;
 		private readonly BingMenu _sut;

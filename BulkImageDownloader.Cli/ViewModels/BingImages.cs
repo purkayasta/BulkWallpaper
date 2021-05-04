@@ -2,9 +2,14 @@
 
 namespace BulkImageDownloader.Cli.ViewModels
 {
-	public struct BingImages
+    public struct BingImages
 	{
-		[JsonPropertyName("url")]
+        public BingImages(string url, string name)
+        {
+            Url = url;
+            Name = name;
+        }
+        [JsonPropertyName("url")]
 		public string Url { get; init; }
 
 		[JsonPropertyName("title")]

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Interfaces;
+﻿using BulkImageDownloader.Cli.Interfaces;
 using BulkImageDownloader.Cli.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BulkImageDownloader.Cli.Services
 {
-	public class Service
+    public class Service
 	{
 		public static async Task InitializeAsync(IServiceProvider serviceProvider, WallpaperModel wallpaperModel, ClientEnum clientEnum)
 		{

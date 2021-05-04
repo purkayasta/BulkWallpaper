@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using BulkImageDownloader.Cli.ViewModels;
+﻿using BulkImageDownloader.Cli.ViewModels;
+using System.Collections.Generic;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-	public class BingMenu : BaseMenu
+    public class BingMenu : BaseMenu
     {
 		//private static int _index = 0;
         private static int _numberOfImages = 7;

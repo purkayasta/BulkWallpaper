@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using BulkImageDownloader.Cli.Config;
+﻿using BulkImageDownloader.Cli.Config;
 using BulkImageDownloader.Cli.Interfaces;
 using BulkImageDownloader.Cli.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-	public class PexelsMenu : BaseMenu
+    public class PexelsMenu : BaseMenu
 	{
 		private readonly IPexelService _pexelService;
 

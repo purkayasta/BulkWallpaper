@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BulkImageDownloader.Cli.ViewModels;
+using System;
 using System.Collections.Generic;
-using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-	public class UnsplashMenu : BaseMenu
+    public class UnsplashMenu : BaseMenu
     {
         private string _url = string.Empty;
         public bool FeatureImage { get; set; } = true;

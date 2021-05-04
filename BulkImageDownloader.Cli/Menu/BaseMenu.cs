@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BulkImageDownloader.Cli.ViewModels;
+using System;
 using System.IO;
-using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-	public abstract class BaseMenu
+    public abstract class BaseMenu
     {
         private readonly ClientEnum _wallpaperClient;
         public BaseMenu(ClientEnum wallpaperClientEnum)

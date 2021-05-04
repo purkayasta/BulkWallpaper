@@ -1,14 +1,14 @@
-﻿using System;
+﻿using BulkImageDownloader.Cli.Helper;
+using BulkImageDownloader.Cli.Interfaces;
+using BulkImageDownloader.Cli.ViewModels;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Helper;
-using BulkImageDownloader.Cli.Interfaces;
-using BulkImageDownloader.Cli.ViewModels;
 
 namespace BulkImageDownloader.Cli.Services
 {
-	public class BingService : BaseService, IBingService
+    public class BingService : BaseService, IBingService
     {
         public BingService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, ClientEnum.Bing)
         {

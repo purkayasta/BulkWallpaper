@@ -1,15 +1,15 @@
-﻿using System;
+﻿using BulkImageDownloader.Cli.Interfaces;
+using BulkImageDownloader.Cli.ViewModels;
+using PexelsDotNetSDK.Api;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Interfaces;
-using BulkImageDownloader.Cli.ViewModels;
-using PexelsDotNetSDK.Api;
 
 namespace BulkImageDownloader.Cli.Services
 {
-	public class PexelService : BaseService, IPexelService
+    public class PexelService : BaseService, IPexelService
 	{
 		private PexelsClient _pexelsClient;
 		public PexelService(IHttpClientFactory httpClientFactory) : base(httpClientFactory, ClientEnum.Pexels)

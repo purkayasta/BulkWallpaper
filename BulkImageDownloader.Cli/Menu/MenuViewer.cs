@@ -1,14 +1,14 @@
-﻿using System;
+﻿using BulkImageDownloader.Cli.Services;
+using BulkImageDownloader.Cli.ViewModels;
+using Humanizer;
+using System;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using BulkImageDownloader.Cli.Services;
-using BulkImageDownloader.Cli.ViewModels;
-using Humanizer;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-	public class MenuViewer
+    public class MenuViewer
 	{
 		public static async Task RunAsync(IServiceProvider serviceProvider)
 		{

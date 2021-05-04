@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BulkImageDownloader.Cli.Services
 {
-	public abstract class BaseService
+    public abstract class BaseService
     {
         private readonly HttpClient _httpClient;
         public BaseService(IHttpClientFactory httpClientFactory, ClientEnum wallpaperClient)

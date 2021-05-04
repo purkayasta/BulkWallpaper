@@ -2,7 +2,7 @@
 
 namespace BulkImageDownloader.Cli.Helper
 {
-	public static class HelperExtensions
+    public static class HelperExtensions
     {
         public static string RemoveSpecialCharacters(this string str)
         {
