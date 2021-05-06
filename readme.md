@@ -4,7 +4,8 @@
 - ✔ Pexels
 - [x] Packted it as a Cli tool
 
-See this On [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
+Download this from [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
+and type `bulkwallpaper` on terminal 😎💢
 
 
 ## Pexels:
