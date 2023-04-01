@@ -11,6 +11,11 @@ Bulk wallpaper downloaded is a tool for you so that you can download wallpaper f
 ![Nuget](https://img.shields.io/github/repo-size/purkayasta/BulkWallpaper?style=social)
 ![Nuget](https://img.shields.io/github/last-commit/purkayasta/BulkImageDownloader.Cli?style=flat-square)
 
-Install this as a tool from [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
+## Installation Method:
+
+1. Install this as a tool from [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
 and type `bulkwallpaper` on terminal and see the magic. 🌟
 
+OR
+
+2. To download and install this directly visit release for [latest version](https://github.com/purkayasta/BulkWallpaper/releases/)
