@@ -26,6 +26,7 @@ namespace BulkWallpaper.Service
 					await Console.Out.WriteLineAsync("Title: " + image.Title);
 					await Console.Out.WriteLineAsync("Copyright: " + image.CopyRight);
 					await _wallpaperService.DownloadAsync(image.Url!, image.Title!.Trim(), "png", location);
+					await Console.Out.WriteLineAsync("\n");
 				}
 				catch (Exception)
 				{

@@ -9,8 +9,7 @@ Console.WriteLine(Credits.WelcomeAnsiText);
 
 try
 {
-	BulkWallpaperMenu.Build();
-
+	await MenuViewer.ShowAsync();
 }
 catch (Exception)
 {

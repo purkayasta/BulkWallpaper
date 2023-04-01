@@ -6,6 +6,20 @@ namespace BulkWallpaper.CLI.Services
 {
 	internal class OrchestrationService
 	{
+		internal static async Task Activate(MenuOption menuOption)
+		{
+			switch (menuOption)
+			{
+				case MenuOption.Bing:
+					await ActivateBing();
+					break;
+				case MenuOption.Unsplash:
+					await ActivateUnsplash();
+					break;
+				default:
+					throw new ArgumentException("Invalid Option");
+			}
+		}
 		internal static async Task ActivateBing()
 		{
 			var bingItem = BingMenu.ShowMenu();
@@ -21,7 +35,7 @@ namespace BulkWallpaper.CLI.Services
 
 		internal static async Task ActivateUnsplash()
 		{
-            await Console.Out.WriteLineAsync();
-        }
+			await Console.Out.WriteLineAsync();
+		}
 	}
 }
