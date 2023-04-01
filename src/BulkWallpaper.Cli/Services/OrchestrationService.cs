@@ -1,5 +1,5 @@
-﻿using BulkImageDownloader.Cli.Menu;
-using BulkImageDownloader.Service;
+﻿using BulkWallpaper.CLI.Menu;
+using BulkWallpaper.Service;
 using BulkWallpaper.Utils;
 
 namespace BulkWallpaper.CLI.Services

@@ -1,18 +1,19 @@
 ﻿using BulkWallpaper.CLI.Services;
-using ConsoleTools;
+using BulkWallpaper.Utils;
 
-namespace BulkImageDownloader.Cli.Menu
+namespace BulkWallpaper.CLI.Menu
 {
-    internal class BulkWallpaperMenu
+	internal class BulkWallpaperMenu
 	{
-		internal static async Task<ConsoleMenu> BuildAsync()
+		internal static void Build()
 		{
-			await Console.Out.WriteLineAsync("Preparing Menu");
-			return new ConsoleMenu
-			{
-				{ "Bing", async () => await OrchestrationService.ActivateBing() },
-				{ "Unsplash",async () => await OrchestrationService.ActivateUnsplash() }
-			};
+			Console.WriteLine("Preparing Menu");
+			//return new ConsoleMenu
+			//{
+			//	{ "Bing", () => OrchestrationService.ActivateBing().GetAwaiter().GetResult() },
+			//	{ "Unsplash", () => OrchestrationService.ActivateUnsplash().GetAwaiter().GetResult() },
+			//	{ "Exit", () => Environment.Exit(0) }
+			//};
 		}
 	}
 }

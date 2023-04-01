@@ -2,7 +2,7 @@
 using BingWallpaper.Installer;
 using BulkWallpaper.Utils;
 
-namespace BulkImageDownloader.Service
+namespace BulkWallpaper.Service
 {
 	public class BingService
 	{
@@ -29,9 +29,9 @@ namespace BulkImageDownloader.Service
 				}
 				catch (Exception)
 				{
-                    await Console.Out.WriteLineAsync("Something went wrong when downloading from bing!");
-                    await Console.Out.WriteLineAsync("Create a issue in the github " + ContactDeveloper.GithubIssueBoardLink);
-                }				
+					await Console.Out.WriteLineAsync("Something went wrong when downloading from bing!");
+					await Console.Out.WriteLineAsync("Create a issue in the github " + ContactDeveloper.GithubIssueBoardLink);
+				}
 			}
 		}
 	}

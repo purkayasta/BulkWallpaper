@@ -56,10 +56,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ConsoleMenu-simple" Version="2.6.0" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\BulkWallpaper.Service\BulkWallpaper.Service.csproj" />
 		<ProjectReference Include="..\BulkWallpaper.Utils\BulkWallpaper.Utils.csproj" />
 	</ItemGroup>

@@ -1,6 +1,6 @@
 ﻿namespace BulkWallpaper.Utils
 {
-	public partial class Utils
+	public static class Utility
 	{
 		public static int InputAndValidateDownloadCount(int minimum, int maximum)
 		{
