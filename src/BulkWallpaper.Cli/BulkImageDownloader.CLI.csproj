@@ -5,10 +5,12 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		
+		<PublishSingleFile>true</PublishSingleFile>
 
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>bulkwallpaper</ToolCommandName>
+
+
 		<Authors>Pritom Purkayasta</Authors>
 		<Description>A light weight CLI tool for downloading wallpapers</Description>
 		<RepositoryUrl>https://github.com/purkayasta/BulkWallpaper</RepositoryUrl>
