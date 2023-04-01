@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__solution-items__", "__sol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulkWallpaper.Cli.UnitTest", "tests\BulkWallpaper.CLI.UnitTest\BulkWallpaper.Cli.UnitTest.csproj", "{1A6F325B-95B5-41BE-86C9-E7BD91AD62F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkWallpaper.Utils", "src\BulkWallpaper.Utils\BulkWallpaper.Utils.csproj", "{C03B6A82-7E5A-477C-B545-C51F1AD5903E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{1A6F325B-95B5-41BE-86C9-E7BD91AD62F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A6F325B-95B5-41BE-86C9-E7BD91AD62F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A6F325B-95B5-41BE-86C9-E7BD91AD62F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03B6A82-7E5A-477C-B545-C51F1AD5903E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03B6A82-7E5A-477C-B545-C51F1AD5903E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03B6A82-7E5A-477C-B545-C51F1AD5903E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03B6A82-7E5A-477C-B545-C51F1AD5903E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{A47EE42D-170B-4589-9A75-9876D6CC27C3} = {7CC1D8B4-70F4-4CC3-8835-65BACC61CFF0}
 		{3125F3A9-34E1-48B3-BB7A-1EF3542F6191} = {7CC1D8B4-70F4-4CC3-8835-65BACC61CFF0}
 		{1A6F325B-95B5-41BE-86C9-E7BD91AD62F7} = {851A9C93-FE02-444A-98DC-45F30B64E79A}
+		{C03B6A82-7E5A-477C-B545-C51F1AD5903E} = {7CC1D8B4-70F4-4CC3-8835-65BACC61CFF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52081365-AF94-488F-9271-DCBCCA4790F0}

@@ -1,10 +1,18 @@
-﻿using BulkImageDownloader.Cli.ViewModels;
-using System.Collections.Generic;
+﻿using BulkWallpaper.Utils;
 
 namespace BulkImageDownloader.Cli.Menu
 {
-    public class BingMenu
-    {
-		
-    }
+    internal class BingMenu
+	{
+		internal static (int, DirectoryInfo?) ShowMenu()
+		{
+			Console.WriteLine("How many days daily Wallpaper you want to download 📷 ? (max: 14)");
+			int userImageNumber = Utils.InputAndValidateDownloadCount(1, 15);
+
+			Console.WriteLine("Where do you want to store the wallpaper? 📂 ");
+			DirectoryInfo? location = Utils.InputAndValidateLocation();
+
+			return (userImageNumber, location);
+		}
+	}
 }

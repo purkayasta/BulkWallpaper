@@ -1,8 +1,8 @@
 ﻿using System.Text;
 
-namespace BulkImageDownloader.Cli.Helper
+namespace BulkWallpaper.Utils
 {
-	public static class HelperExtensions
+	public static class Extensions
 	{
 		public static string RemoveSpecialCharacters(this string str)
 		{

@@ -11,4 +11,8 @@
 		<PackageReference Include="PexelsDotNetSDK" Version="1.0.8" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\BulkWallpaper.Utils\BulkWallpaper.Utils.csproj" />
+	</ItemGroup>
+
 </Project>
