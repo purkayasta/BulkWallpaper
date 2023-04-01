@@ -2,9 +2,7 @@
 using BulkWallpaper.CLI.Menu;
 using BulkWallpaper.Utils;
 
-Console.OutputEncoding = Encoding.Unicode;
-
-
+//Console.OutputEncoding = Encoding.Unicode;
 Console.WriteLine(Credits.WelcomeAnsiText);
 
 try
@@ -13,9 +11,10 @@ try
 }
 catch (Exception)
 {
-	Console.WriteLine(Credits.NetworkError);
-	Console.WriteLine(Credits.SorryText);
+	Console.WriteLine("\n");
+	Console.WriteLine(Credits.TryAgainText);
 }
-
-Console.WriteLine(Credits.GoodByeAnsiText);
+Console.WriteLine("\n");
+Console.WriteLine(Credits.ThankYouText);
+Console.WriteLine("\n");
 Console.WriteLine("To know more about visit: " + ContactDeveloper.RepositoryLink);

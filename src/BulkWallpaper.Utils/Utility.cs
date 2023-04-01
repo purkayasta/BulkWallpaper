@@ -5,7 +5,10 @@
 		public static int InputAndValidateDownloadCount(int minimum, int maximum)
 		{
 			if (!int.TryParse(Console.ReadLine(), out int number))
+			{
+				Console.WriteLine("Invalid Input! again..");
 				InputAndValidateDownloadCount(minimum, maximum);
+			}
 
 			if (number < minimum || number > maximum)
 			{
@@ -41,14 +44,14 @@
 
 		public static string InputAndValidatedStringTagInput()
 		{
-			Console.WriteLine("Add comma separated tags in a line. If you wish not to input. Press Enter to skip.");
+			Console.WriteLine("Add comma separated tags in a line.");
 			string? tagInput = Console.ReadLine()?.Trim();
 			if (string.IsNullOrEmpty(tagInput) || string.IsNullOrWhiteSpace(tagInput))
 			{
 				Console.WriteLine("No tag entered");
-				return string.Empty;
+				InputAndValidatedStringTagInput();
 			}
-			return tagInput!.Trim();
+			return tagInput!;
 		}
 
 		public static bool InputAndValidateYesNoAnswer()
