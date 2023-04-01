@@ -1,16 +1,10 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace BulkImageDownloader.Cli.Services
+﻿namespace BulkImageDownloader.Service
 {
-    public abstract class BaseService
+    public class DownloadService
     {
         private readonly HttpClient _httpClient;
-        public BaseService(IHttpClientFactory httpClientFactory, ClientEnum wallpaperClient)
-        {
-            _httpClient = httpClientFactory.CreateClient(wallpaperClient.ToString());
-        }
+        public DownloadService(HttpClient httpClient) => _httpClient = httpClient;
+
         public async Task SaveAsync(HttpResponseMessage response, string localPathWithImageName)
         {
             using var fileStream = await response.Content.ReadAsStreamAsync();
@@ -18,8 +12,6 @@ namespace BulkImageDownloader.Cli.Services
             await fileStream.CopyToAsync(streamWriter);
         }
         public async Task<HttpResponseMessage> GetContentAsync(string url)
-        {
-            return await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-        }
+            => await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
     }
 }

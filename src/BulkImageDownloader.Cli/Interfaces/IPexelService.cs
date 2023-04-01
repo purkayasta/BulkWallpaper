@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BulkImageDownloader.Cli.Interfaces
 {
-    public interface IPexelService : IDownloadService
+    internal interface IPexelService
 	{
 		Task<List<ImageInfo>> GetCurratedImagesAsync(int count);
 		bool InitiateConnection(string accessKey);
