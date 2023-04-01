@@ -15,28 +15,58 @@
 			return number;
 		}
 
-		public static DirectoryInfo? InputAndValidateLocation()
+		public static DirectoryInfo? InputAndValidateLocation(string? prefix = null)
 		{
 			string? location = Console.ReadLine()?.Trim();
 
 			if (string.IsNullOrEmpty(location) || string.IsNullOrWhiteSpace(location))
 			{
 				Console.WriteLine("Invalid Input! Input again..");
-				InputAndValidateLocation();
+				InputAndValidateLocation(prefix);
 			}
 
 			try
 			{
-				var directoryInfo = Directory.CreateDirectory(location!);
+				var directoryInfo = Directory.CreateDirectory(location! + "/" + prefix);
 				return directoryInfo;
 			}
 			catch (Exception)
 			{
 				Console.WriteLine("Invalid directory location! Input again..");
-				InputAndValidateLocation();
+				InputAndValidateLocation(prefix);
 			}
 
 			return null;
+		}
+
+		public static string InputAndValidatedStringTagInput()
+		{
+			Console.WriteLine("Add comma separated tags in a line. If you wish not to input. Press Enter to skip.");
+			string? tagInput = Console.ReadLine()?.Trim();
+			if (string.IsNullOrEmpty(tagInput) || string.IsNullOrWhiteSpace(tagInput))
+			{
+				Console.WriteLine("No tag entered");
+				return string.Empty;
+			}
+			return tagInput!.Trim();
+		}
+
+		public static bool InputAndValidateYesNoAnswer()
+		{
+			Console.WriteLine("Input [Y]es/[N]o");
+			string? strInput = Console.ReadLine()?.Trim();
+			if (string.IsNullOrEmpty(strInput) || string.IsNullOrWhiteSpace(strInput))
+			{
+				Console.WriteLine("Incorrect Input");
+				InputAndValidatedStringTagInput();
+			}
+
+			if (strInput!.ToLower().Equals("y") || strInput.ToLower().Equals("yes"))
+				return true;
+			if (strInput!.ToLower().Equals("n") || strInput.ToLower().Equals("no"))
+				return false;
+
+			throw new Exception("Invalid User Input.");
 		}
 	}
 }

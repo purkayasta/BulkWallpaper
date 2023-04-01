@@ -19,7 +19,7 @@
 				using var fileStream = File.Create(downloadablePath);
 				await stream.CopyToAsync(fileStream);
 
-				await Console.Out.WriteLineAsync($"\n File downloaded at {downloadablePath} \n");
+				await Console.Out.WriteLineAsync($"\n File downloaded at {downloadablePath} ✅");
 			}
 			catch (Exception exception)
 			{

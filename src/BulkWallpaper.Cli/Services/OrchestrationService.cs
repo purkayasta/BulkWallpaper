@@ -35,7 +35,15 @@ namespace BulkWallpaper.CLI.Services
 
 		internal static async Task ActivateUnsplash()
 		{
-			await Console.Out.WriteLineAsync();
+			var menuItem = UnsplashMenu.ShowMenu();
+
+			if (menuItem.Item2 == null || menuItem.Item1 < 1)
+			{
+				Console.WriteLine("Critical Error! Create a github issue");
+				Console.WriteLine("Github Issue: " + ContactDeveloper.GithubIssueBoardLink);
+				Console.WriteLine("Repository: " + ContactDeveloper.RepositoryLink);
+			}
+			await UnsplashService.DownloadAsync(menuItem.Item1, menuItem.Item2!.FullName, menuItem.Item3, menuItem.Item4);
 		}
 	}
 }
