@@ -1,9 +1,9 @@
 ﻿using BulkImageDownloader.Cli.Menu;
 using Xunit;
 
-namespace BulkImageDownloader.Cli.Test.Helper
+namespace BulkImageDownloader.Cli.Console.Menu
 {
-    public class MenuViewerTest
+	public class MenuViewerTest
 	{
 		[Fact]
 		public void DetectWallpaperProvider_ShouldDetectBing_WhenProvidedBing()

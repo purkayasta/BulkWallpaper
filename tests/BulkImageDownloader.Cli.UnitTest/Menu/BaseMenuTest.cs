@@ -3,9 +3,9 @@ using Moq;
 using System.IO;
 using Xunit;
 
-namespace BulkImageDownloader.Cli.Test.Menu
+namespace BulkImageDownloader.Cli.Console.Menu
 {
-    public class BaseMenuTest
+	public class BaseMenuTest
 	{
 		private readonly Mock<BaseMenu> _mockSut;
 		private readonly BaseMenu _sut;
