@@ -5,11 +5,17 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<PublishSingleFile>true</PublishSingleFile>
+		<!--<PublishSingleFile>true</PublishSingleFile>-->
+
+		<!--<PublishTrimmed>true</PublishTrimmed>
+		<TrimMode>Link</TrimMode>-->
 
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>bulkwallpaper</ToolCommandName>
 
+		<PackageId>BulkImageDownloader.Cli</PackageId>
+		<Version>1.0.2</Version>
+		<PackageVersion>1.0.2</PackageVersion>
 
 		<Authors>Pritom Purkayasta</Authors>
 		<Description>A light weight CLI tool for downloading wallpapers</Description>
@@ -24,7 +30,6 @@
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageIcon>bulk-wallpaper-icon.png</PackageIcon>
-		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

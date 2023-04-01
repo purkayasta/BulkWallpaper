@@ -1,21 +1,16 @@
 # Bulk Image Downloader
-- ✔ Unsplash
-- ✔ Bing
-- ✔ Pexels
-- [x] Packted it as a Cli tool
+## Give it a star if you like the project. 👏 🌠 🌟
 
-Download this from [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
-and type `bulkwallpaper` on terminal 😎💢
+Bulk wallpaper downloaded is a tool for you so that you can download wallpaper from 
+- Bing
+- Unsplash Random
 
 
-## Pexels:
-For Pexels, For security purpose I have removed My accesskey, You can easily get your key from [here](https://www.pexels.com/api/)
-Just create a new account and thats it :D
-When you have your key, just add it to appsetting.json file
+![Nuget](https://img.shields.io/nuget/v/BulkWallpaper)
+![Nuget](https://img.shields.io/nuget/dt/BulkWallpaper?style=plastic)
+![Nuget](https://img.shields.io/github/repo-size/purkayasta/BulkWallpaper?style=social)
+![Nuget](https://img.shields.io/github/last-commit/purkayasta/BulkWallpaper?style=flat-square)
 
+Install this as a tool from [Nuget](https://www.nuget.org/packages/BulkImageDownloader.Cli/)
+and type `bulkwallpaper` on terminal and see the magic. 🌟
 
-## Unsplash Demo
-![unsplash-bulk](https://user-images.githubusercontent.com/12936435/116474214-09eeb180-a89a-11eb-8523-bc474bafcd4d.gif)
-
-## Bing  Daily Images Demo
-![Bing-daily-bulk](https://user-images.githubusercontent.com/12936435/116474468-5e922c80-a89a-11eb-8374-57518f601029.gif)
