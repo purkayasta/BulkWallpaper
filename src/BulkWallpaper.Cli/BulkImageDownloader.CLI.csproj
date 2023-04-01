@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<!--<PublishSingleFile>true</PublishSingleFile>-->
+
+		<!--<PublishTrimmed>true</PublishTrimmed>
+		<TrimMode>Link</TrimMode>-->
+
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>bulkwallpaper</ToolCommandName>
+
+		<PackageId>BulkImageDownloader.Cli</PackageId>
+		<Version>1.0.2</Version>
+		<PackageVersion>1.0.2</PackageVersion>
+
+		<Authors>Pritom Purkayasta</Authors>
+		<Description>A light weight CLI tool for downloading wallpapers</Description>
+		<RepositoryUrl>https://github.com/purkayasta/BulkWallpaper</RepositoryUrl>
+		<PackageTags>dotnet, unsplash, bing-wallpaper, pexels, wallpaper, downloader, csharp</PackageTags>
+		<Title>BulkWallpaper</Title>
+		<Copyright>Pritom Purkayasta</Copyright>
+		<PackageProjectUrl>https://github.com/purkayasta/BulkWallpaper</PackageProjectUrl>
+		<PackageReadmeFile>nuget.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageIcon>bulk-wallpaper-icon.png</PackageIcon>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<Prefer32Bit>true</Prefer32Bit>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Optimize>true</Optimize>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="bulk-wallpaper.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\assets\bulk-wallpaper-icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\nuget.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BulkWallpaper.Service\BulkWallpaper.Service.csproj" />
+		<ProjectReference Include="..\BulkWallpaper.Utils\BulkWallpaper.Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>
