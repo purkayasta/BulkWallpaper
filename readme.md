@@ -9,7 +9,7 @@ Bulk wallpaper downloaded is a tool for you so that you can download wallpaper f
 ![Nuget](https://img.shields.io/nuget/v/BulkImageDownloader.Cli)
 ![Nuget](https://img.shields.io/nuget/dt/BulkImageDownloader.Cli?style=plastic)
 ![Nuget](https://img.shields.io/github/repo-size/purkayasta/BulkWallpaper?style=social)
-![Nuget](https://img.shields.io/github/last-commit/purkayasta/BulkWallpaper.Cli?style=flat-square)
+![Nuget](https://img.shields.io/github/last-commit/purkayasta/BulkWallpaper?style=flat-square)
 
 ## Installation Method:
 
