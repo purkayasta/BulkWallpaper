@@ -4,7 +4,7 @@ using BulkWallpaper.Utils;
 
 namespace BulkWallpaper.CLI.Services
 {
-	internal class OrchestrationService
+	internal static class OrchestrationService
 	{
 		internal static async Task Activate(MenuOption menuOption)
 		{

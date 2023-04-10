@@ -1,8 +1,6 @@
-﻿using System.Text;
-using BulkWallpaper.CLI.Menu;
+﻿using BulkWallpaper.CLI.Menu;
 using BulkWallpaper.Utils;
 
-//Console.OutputEncoding = Encoding.Unicode;
 Console.WriteLine(Credits.WelcomeAnsiText);
 
 try
