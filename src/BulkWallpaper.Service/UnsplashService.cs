@@ -8,15 +8,15 @@ namespace BulkWallpaper.Service
         private const string _picResolution = "1920x1080";
         private readonly static DownloadService _downloadService = new(new HttpClient());
 
-        public static async Task DownloadAsync(int downloadCount, string localPath, string? tags, bool isFeatured)
+        public static void Download(int downloadCount, string localPath, string? tags, bool isFeatured)
         {
             var url = GetUnsplashUrl(tags, isFeatured);
-            await Console.Out.WriteLineAsync(url);
-            await Console.Out.WriteLineAsync("Alert ⚠ Downloading process will be delayed intentionally because hitting unsplash will be blocked");
+            Console.WriteLine(url);
+            Console.WriteLine("Alert ⚠ Downloading process will be delayed intentionally because hitting unsplash will be blocked");
 
             for (int i = 0; i < downloadCount; i++)
             {
-                await _downloadService.DownloadAsync(
+                _downloadService.Download(
                     url: url,
                     localPath: localPath,
                     imageName: Guid.NewGuid().ToString(),
@@ -24,7 +24,7 @@ namespace BulkWallpaper.Service
 
                 // source.unsplash.com caches the ip so hitting too much at a same time won't get a new wallpaper
                 // thats why there is an artificial delay to that.
-                await Task.Delay(2000);
+                Task.Delay(2000).GetAwaiter().GetResult();
             }
 
         }

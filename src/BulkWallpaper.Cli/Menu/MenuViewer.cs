@@ -6,7 +6,7 @@ namespace BulkWallpaper.CLI.Menu
     internal static class MenuViewer
     {
         private static bool isTaskDone = false;
-        internal static async Task ShowAsync()
+        internal static MenuOption? Show()
         {
             Console.WriteLine("Preparing Menu");
 
@@ -26,8 +26,8 @@ namespace BulkWallpaper.CLI.Menu
                 try
                 {
                     var menuOption = choice.ToMenuOption();
-                    await OrchestrationService.Activate(menuOption);
                     isTaskDone = true;
+                    return menuOption;
                 }
                 catch (Exception)
                 {
@@ -35,6 +35,7 @@ namespace BulkWallpaper.CLI.Menu
                     continue;
                 }
             }
+            return default;
         }
         private static Dictionary<MenuOption, string> GetMenuOptions()
         {

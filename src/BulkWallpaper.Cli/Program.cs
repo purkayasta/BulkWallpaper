@@ -1,16 +1,25 @@
 ﻿using BulkWallpaper.CLI.Menu;
+using BulkWallpaper.CLI.Services;
 using BulkWallpaper.Utils;
 
 Console.WriteLine(Credits.WelcomeAnsiText);
 
 try
 {
-	await MenuViewer.ShowAsync();
+    var menuOption = MenuViewer.Show();
+    if (menuOption is null)
+    {
+        Console.WriteLine(Credits.SorryText);
+        Console.WriteLine("Please file a issue here: " + ContactDeveloper.GithubIssueBoardLink);
+        return;
+    }
+    OrchestrationService.Activate(menuOption.Value);
 }
-catch (Exception)
+catch (Exception ex)
 {
-	Console.WriteLine("\n");
-	Console.WriteLine(Credits.TryAgainText);
+    Console.WriteLine(ex);
+    Console.WriteLine("\n");
+    Console.WriteLine(Credits.TryAgainText);
 }
 Console.WriteLine("\n");
 Console.WriteLine(Credits.ThankYouText);
