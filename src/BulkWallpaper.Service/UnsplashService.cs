@@ -2,17 +2,16 @@
 
 namespace BulkWallpaper.Service
 {
-    public sealed class UnsplashService
+    public static class UnsplashService
     {
-        private const string _baseUrl = "https://source.unsplash.com";
-        private const string _picResolution = "1920x1080";
-        private readonly DownloadService _downloadService = new(new HttpClient());
+        private static readonly string _baseUrl = "https://source.unsplash.com";
+        private static readonly string _picResolution = "1920x1080";
+        private static readonly DownloadService _downloadService = new(new HttpClient());
 
-        public void Download(int downloadCount, string localPath, string? tags, bool isFeatured)
+        public static void Download(int downloadCount, string localPath, string? tags, bool isFeatured)
         {
             var url = GetUnsplashUrl(tags, isFeatured);
-            Console.WriteLine(url);
-            Console.WriteLine("Alert ⚠ Downloading process will be delayed intentionally because hitting unsplash will be blocked");
+            Console.WriteLine("Alert ⚠ Downloading process will be delayed intentionally because hitting unsplash instantly will blocked the ip 💀");
 
             for (int i = 0; i < downloadCount; i++)
             {
@@ -31,9 +30,10 @@ namespace BulkWallpaper.Service
 
         private static string GetUnsplashUrl(string? tags, bool isFeatured)
         {
-            StringBuilder urlBuilder = new StringBuilder();
+            StringBuilder urlBuilder = new();
 
             urlBuilder.Append(_baseUrl);
+
             if (isFeatured)
                 urlBuilder.Append("/featured");
 

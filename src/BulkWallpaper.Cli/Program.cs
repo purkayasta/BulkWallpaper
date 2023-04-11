@@ -1,6 +1,10 @@
-﻿using BulkWallpaper.CLI.Menu;
+﻿using System.Text;
+using BulkWallpaper.CLI.Menu;
 using BulkWallpaper.CLI.Services;
 using BulkWallpaper.Utils;
+
+Console.OutputEncoding = Encoding.Unicode;
+Console.InputEncoding = Encoding.Unicode;
 
 Console.WriteLine(Credits.WelcomeAnsiText);
 
@@ -13,7 +17,8 @@ try
         Console.WriteLine("Please file a issue here: " + ContactDeveloper.GithubIssueBoardLink);
         return;
     }
-    new OrchestrationService().Run(menuOption.Value);
+    OrchestrationService.Run(menuOption.Value);
+
 }
 catch (Exception ex)
 {

@@ -4,16 +4,11 @@ using BulkWallpaper.Utils;
 
 namespace BulkWallpaper.Service
 {
-    public class BingService
+    public static class BingService
     {
-        private readonly IBingWallpaperService? _wallpaperService;
+        private static readonly IBingWallpaperService? _wallpaperService = BingWallpaperInstaller.CreateService();
 
-        public BingService()
-        {
-            _wallpaperService = BingWallpaperInstaller.CreateService();
-        }
-
-        public void Download(int download, string location)
+        public static void Download(int download, string location)
         {
             var bingWallpaperSource = _wallpaperService!.GetDailyWallpaperInfo(download);
 

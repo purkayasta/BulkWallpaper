@@ -4,25 +4,25 @@ using BulkWallpaper.Utils;
 
 namespace BulkWallpaper.CLI.Services
 {
-    internal sealed class OrchestrationService
+    internal static class OrchestrationService
     {
-        internal void Run(MenuOption menuOption)
+        internal static void Run(MenuOption menuOption)
         {
             switch (menuOption)
             {
                 case MenuOption.Exit:
                     break;
                 case MenuOption.Bing:
-                    ActivateBing();
+                    RunBingDownloader();
                     break;
                 case MenuOption.Unsplash:
-                    ActivateUnsplash();
+                    RunUnsplashDownloader();
                     break;
                 default:
                     throw new ArgumentException("Invalid Option");
             }
         }
-        internal static void ActivateBing()
+        internal static void RunBingDownloader()
         {
             var bingItem = BingMenu.ShowMenu();
 
@@ -32,10 +32,10 @@ namespace BulkWallpaper.CLI.Services
                 Console.WriteLine("Github Issue: " + ContactDeveloper.GithubIssueBoardLink);
                 Console.WriteLine("Repository: " + ContactDeveloper.RepositoryLink);
             }
-            new BingService().Download(bingItem.Item1, bingItem.Item2!.FullName);
+            BingService.Download(bingItem.Item1, bingItem.Item2!.FullName);
         }
 
-        internal static void ActivateUnsplash()
+        internal static void RunUnsplashDownloader()
         {
             var menuItem = UnsplashMenu.ShowMenu();
 
@@ -45,7 +45,8 @@ namespace BulkWallpaper.CLI.Services
                 Console.WriteLine("Github Issue: " + ContactDeveloper.GithubIssueBoardLink);
                 Console.WriteLine("Repository: " + ContactDeveloper.RepositoryLink);
             }
-            new UnsplashService().Download(menuItem.Item1, menuItem.Item2!.FullName, menuItem.Item3, menuItem.Item4);
+
+            UnsplashService.Download(menuItem.Item1, menuItem.Item2!.FullName, menuItem.Item3, menuItem.Item4);
         }
     }
 }
