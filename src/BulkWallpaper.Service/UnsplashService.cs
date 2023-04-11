@@ -2,47 +2,47 @@
 
 namespace BulkWallpaper.Service
 {
-	public class UnsplashService
-	{
-		private const string _baseUrl = "https://source.unsplash.com";
-		private const string _picResolution = "1920x1080";
-		private readonly static DownloadService _downloadService = new(new HttpClient());
+    public static class UnsplashService
+    {
+        private static readonly string _baseUrl = "https://source.unsplash.com";
+        private static readonly string _picResolution = "1920x1080";
+        private static readonly DownloadService _downloadService = new(new HttpClient());
 
-		public static async Task DownloadAsync(int downloadCount, string localPath, string? tags, bool isFeatured)
-		{
-			var url = GetUnsplashUrl(tags, isFeatured);
-			await Console.Out.WriteLineAsync(url);
-			await Console.Out.WriteLineAsync("Alert ⚠ Downloading process will be delayed intentionally because hitting unsplash will be blocked");
+        public static void Download(int downloadCount, string localPath, string? tags, bool isFeatured)
+        {
+            var url = GetUnsplashUrl(tags, isFeatured);
+            Console.WriteLine("Alert ⚠ Downloading process will be delayed intentionally because hitting unsplash instantly will blocked the ip 💀");
 
-			for (int i = 0; i < downloadCount; i++)
-			{
-				await _downloadService.DownloadAsync(
-					url: url,
-					localPath: localPath,
-					imageName: Guid.NewGuid().ToString(),
-					imageExtension: "png");
+            for (int i = 0; i < downloadCount; i++)
+            {
+                _downloadService.Download(
+                    url: url,
+                    localPath: localPath,
+                    imageName: Guid.NewGuid().ToString(),
+                    imageExtension: "png");
 
-				// source.unsplash.com caches the ip so hitting too much at a same time won't get a new wallpaper
-				// thats why there is an artificial delay to that.
-				await Task.Delay(2000);
-			}
+                // source.unsplash.com caches the ip so hitting too much at a same time won't get a new wallpaper
+                // thats why there is an artificial delay to that.
+                Task.Delay(2000).GetAwaiter().GetResult();
+            }
 
-		}
+        }
 
-		private static string GetUnsplashUrl(string? tags, bool isFeatured)
-		{
-			StringBuilder urlBuilder = new StringBuilder();
+        private static string GetUnsplashUrl(string? tags, bool isFeatured)
+        {
+            StringBuilder urlBuilder = new();
 
-			urlBuilder.Append(_baseUrl);
-			if (isFeatured)
-				urlBuilder.Append("/featured");
+            urlBuilder.Append(_baseUrl);
 
-			urlBuilder.Append("/" + _picResolution);
+            if (isFeatured)
+                urlBuilder.Append("/featured");
 
-			if (!string.IsNullOrEmpty(tags))
-				urlBuilder.Append($"/?{tags}");
+            urlBuilder.Append("/" + _picResolution);
 
-			return urlBuilder.ToString();
-		}
-	}
+            if (!string.IsNullOrEmpty(tags))
+                urlBuilder.Append($"/?{tags}");
+
+            return urlBuilder.ToString();
+        }
+    }
 }

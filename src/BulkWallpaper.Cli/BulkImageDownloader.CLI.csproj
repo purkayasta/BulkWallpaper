@@ -5,17 +5,15 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<!--<PublishSingleFile>true</PublishSingleFile>-->
 
-		<!--<PublishTrimmed>true</PublishTrimmed>
-		<TrimMode>Link</TrimMode>-->
+		<PublishSingleFile>true</PublishSingleFile>
+		<!-- <PublishTrimmed>true</PublishTrimmed> -->
 
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>bulkwallpaper</ToolCommandName>
 
 		<PackageId>BulkImageDownloader.Cli</PackageId>
-		<Version>1.0.2</Version>
-		<PackageVersion>1.0.2</PackageVersion>
+		<PackageVersion>1.0.3</PackageVersion>
 
 		<Authors>Pritom Purkayasta</Authors>
 		<Description>A light weight CLI tool for downloading wallpapers</Description>
