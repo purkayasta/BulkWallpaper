@@ -2,13 +2,13 @@
 
 namespace BulkWallpaper.Service
 {
-    public static class UnsplashService
+    public sealed class UnsplashService
     {
         private const string _baseUrl = "https://source.unsplash.com";
         private const string _picResolution = "1920x1080";
-        private readonly static DownloadService _downloadService = new(new HttpClient());
+        private readonly DownloadService _downloadService = new(new HttpClient());
 
-        public static void Download(int downloadCount, string localPath, string? tags, bool isFeatured)
+        public void Download(int downloadCount, string localPath, string? tags, bool isFeatured)
         {
             var url = GetUnsplashUrl(tags, isFeatured);
             Console.WriteLine(url);

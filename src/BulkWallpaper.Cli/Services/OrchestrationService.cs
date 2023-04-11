@@ -4,9 +4,9 @@ using BulkWallpaper.Utils;
 
 namespace BulkWallpaper.CLI.Services
 {
-    internal static class OrchestrationService
+    internal sealed class OrchestrationService
     {
-        internal static void Activate(MenuOption menuOption)
+        internal void Run(MenuOption menuOption)
         {
             switch (menuOption)
             {
@@ -32,7 +32,7 @@ namespace BulkWallpaper.CLI.Services
                 Console.WriteLine("Github Issue: " + ContactDeveloper.GithubIssueBoardLink);
                 Console.WriteLine("Repository: " + ContactDeveloper.RepositoryLink);
             }
-            BingService.Download(bingItem.Item1, bingItem.Item2!.FullName);
+            new BingService().Download(bingItem.Item1, bingItem.Item2!.FullName);
         }
 
         internal static void ActivateUnsplash()
@@ -45,7 +45,7 @@ namespace BulkWallpaper.CLI.Services
                 Console.WriteLine("Github Issue: " + ContactDeveloper.GithubIssueBoardLink);
                 Console.WriteLine("Repository: " + ContactDeveloper.RepositoryLink);
             }
-            UnsplashService.Download(menuItem.Item1, menuItem.Item2!.FullName, menuItem.Item3, menuItem.Item4);
+            new UnsplashService().Download(menuItem.Item1, menuItem.Item2!.FullName, menuItem.Item3, menuItem.Item4);
         }
     }
 }

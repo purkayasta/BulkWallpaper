@@ -13,7 +13,7 @@ try
         Console.WriteLine("Please file a issue here: " + ContactDeveloper.GithubIssueBoardLink);
         return;
     }
-    OrchestrationService.Activate(menuOption.Value);
+    new OrchestrationService().Run(menuOption.Value);
 }
 catch (Exception ex)
 {

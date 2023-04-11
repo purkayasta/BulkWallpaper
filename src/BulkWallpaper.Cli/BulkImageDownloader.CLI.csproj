@@ -14,7 +14,6 @@
 		<ToolCommandName>bulkwallpaper</ToolCommandName>
 
 		<PackageId>BulkImageDownloader.Cli</PackageId>
-		<Version>1.0.2</Version>
 		<PackageVersion>1.0.2</PackageVersion>
 
 		<Authors>Pritom Purkayasta</Authors>
